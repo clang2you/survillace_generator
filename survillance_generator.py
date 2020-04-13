@@ -43,7 +43,7 @@ class MyMainForm(QMainWindow, Ui_main_window.Ui_MainWindow):
         elif cb.currentText() == "十六画面":
             print("sixteen")
         else:
-            print("twentyFive")
+            self.AddTwentyfiveGridLayoutToTab(layout, page)
     
     def AddConnectToBtn(self, page):
         if self.images != None:
@@ -187,6 +187,43 @@ class MyMainForm(QMainWindow, Ui_main_window.Ui_MainWindow):
         layout.addWidget(frame)
         self.AddConnectToBtn(page)
     
+
+    def AddTwentyfiveGridLayoutToTab(self, layout, page):
+        pageNo = page.objectName()[-1]
+        frame = QtWidgets.QFrame(self.horizontalLayoutWidget)
+        frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
+        frame.setFrameShadow(QtWidgets.QFrame.Raised)
+        frame.setObjectName("frame" + pageNo)
+        y_offset = 140
+        x_offset = 220
+        start_x = 20
+        start_y = 10
+        # _translate = QtCore.QCoreApplication.translate
+        start_no = 1
+        for i in range(5):
+            for j in range(5):
+                childFrame = QtWidgets.QFrame(frame)
+                childFrame.setGeometry(QtCore.QRect(start_x, start_y, 211, 131))
+                childFrame.setFrameShape(QtWidgets.QFrame.Box)
+                childFrame.setFrameShadow(QtWidgets.QFrame.Raised)
+                childFrame.setObjectName("frame" + pageNo +"_" + str(start_no))
+                childLabel = QtWidgets.QLabel(childFrame)
+                childLabel.setGeometry(QtCore.QRect(0, 0, 211, 131))
+                childLabel.setAlignment(QtCore.Qt.AlignCenter)
+                childLabel.setObjectName("label" + pageNo + "_" + str(start_no))
+                childLabel.setText("图片" + str(start_no))
+                childPushbtn = QtWidgets.QPushButton(childFrame)
+                childPushbtn.setGeometry(QtCore.QRect(100, 100, 101, 23))
+                childPushbtn.setText("插入 / 更改图片")
+                childPushbtn.setObjectName("pushButton" + pageNo +"_" +  str(start_no))
+                start_x += x_offset
+                start_no += 1
+            start_x = 20
+            start_y += y_offset
+        layout.addWidget(frame)
+        self.AddConnectToBtn(page)
+
+    
     def InsertImage(self, no):
         self.currentImagePath = QFileDialog.getOpenFileName(self, "选择图片文件","", "JPG 图片(*.jpg *.jpeg)")[0]
         self.currentDisplayLabel = "label" + no
@@ -199,7 +236,7 @@ class MyMainForm(QMainWindow, Ui_main_window.Ui_MainWindow):
         print(self.images)
     
     def ImageShowOnLabel(self, pixMapImage):
-        self.current_label = self.tab1.findChild((QLabel), self.currentDisplayLabel)
+        self.current_label = self.findChild((QLabel), self.currentDisplayLabel)
         self.current_label.setPixmap(pixMapImage)
         self.current_label.setScaledContents(True)
     

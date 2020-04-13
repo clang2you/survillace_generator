@@ -1,0 +1,7 @@
+setup.py
+survillance_generator.py
+survillance_generator.egg-info/PKG-INFO
+survillance_generator.egg-info/SOURCES.txt
+survillance_generator.egg-info/dependency_links.txt
+survillance_generator.egg-info/requires.txt
+survillance_generator.egg-info/top_level.txt

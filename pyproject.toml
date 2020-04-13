@@ -5,7 +5,7 @@ description = "LN3 IT"
 authors = ["Lex Chen"]
 
 [tool.poetry.dependencies]
-python = "^3.8"
+python = "^3.7"
 pyqt5_tools = "^5.13.2"
 python-pptx = "^0.6.18"
 sip = "^5.2.0"
